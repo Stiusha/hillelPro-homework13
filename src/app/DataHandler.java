@@ -7,13 +7,20 @@ public class DataHandler {
 
     private final Lock lock = new ReentrantLock();
 
-    public int modify(int num) {
-        lock.lock();
-        try {
-            num = num * 3;
-            return num;
-        } finally {
-            lock.unlock();
+
+    public void handleData(int[] numbers) {
+        for (int i = 0; i < numbers.length; i++) {
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + " хоче взяти лок");
+            lock.lock();
+            try {
+                System.out.println(threadName + " взяв лок");
+                numbers[i] = numbers[i] * 3;
+            } finally {
+                System.out.println(threadName + " хоче віддати лок");
+                lock.unlock();
+                System.out.println(threadName + " віддав лок");
+            }
         }
     }
 }

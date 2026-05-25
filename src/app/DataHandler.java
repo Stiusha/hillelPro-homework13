@@ -11,15 +11,15 @@ public class DataHandler {
     public void handleData(int[] numbers) {
         for (int i = 0; i < numbers.length; i++) {
             String threadName = Thread.currentThread().getName();
-            System.out.println(threadName + " хоче взяти лок");
+            System.out.println(threadName + " wants to acquire the lock");
             lock.lock();
             try {
-                System.out.println(threadName + " взяв лок");
+                System.out.println(threadName + " acquired the lock");
                 numbers[i] = numbers[i] * 3;
             } finally {
-                System.out.println(threadName + " хоче віддати лок");
+                System.out.println(threadName + " wants to release the lock");
                 lock.unlock();
-                System.out.println(threadName + " віддав лок");
+                System.out.println(threadName + " released the lock");
             }
         }
     }
